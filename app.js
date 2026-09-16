@@ -1,7 +1,21 @@
 const API_URL = "http://localhost:8080/productos";
-let productos = []; // Ahora se llenará desde la base de datos
-let idEditando = null; 
+const AUTH_URL = "http://localhost:8080/api/auth";
 
+// Protección de rutas
+const paginaActual = window.location.pathname.split("/").pop();
+const usuarioActual = localStorage.getItem("usuario");
+
+if (!usuarioActual && paginaActual !== "login.html" && paginaActual !== "registro.html") {
+    window.location.href = "login.html";
+}
+
+function cerrarSesion() {
+    localStorage.removeItem("usuario");
+    window.location.href = "login.html";
+}
+
+let productos = []; // Ahora se llenará desde la base de datos
+let idEditando = null;
 // Función para consultar productos a la BD (READ)
 async function mostrarProductos() {
     try {
