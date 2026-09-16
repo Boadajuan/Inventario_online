@@ -5,13 +5,13 @@ const AUTH_URL = "http://localhost:8080/api/auth";
 const paginaActual = window.location.pathname.split("/").pop();
 const usuarioActual = localStorage.getItem("usuario");
 
-if (!usuarioActual && paginaActual !== "login.html" && paginaActual !== "registro.html") {
-    window.location.href = "login.html";
+if (!usuarioActual && paginaActual !== "index.html" && paginaActual !== "registro.html" && paginaActual !== "") {
+    window.location.href = "index.html";
 }
 
 function cerrarSesion() {
     localStorage.removeItem("usuario");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 let productos = []; // Ahora se llenará desde la base de datos

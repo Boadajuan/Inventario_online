@@ -43,7 +43,7 @@
             <button type="submit" class="btn btn-primary w-100 fw-bold">Registrarse</button>
         </form>
         <div class="text-center mt-3">
-            <p class="mb-0">¿Ya tienes cuenta? <a href="login.html" class="text-decoration-none">Inicia sesión</a></p>
+            <p class="mb-0">¿Ya tienes cuenta? <a href="index.html" class="text-decoration-none">Inicia sesión</a></p>
         </div>
     </div>
 
@@ -63,7 +63,7 @@
 
                 if (respuesta.ok) {
                     alert("Registro exitoso. Ahora puedes iniciar sesión.");
-                    window.location.href = "login.html";
+                    window.location.href = "index.html";
                 } else {
                     const errorData = await respuesta.json();
                     alert("Error: " + (errorData.error || "No se pudo registrar"));
