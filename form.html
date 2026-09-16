@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Producto</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <header class="bg-primary text-white text-center p-3 mb-4">
+    <h1>Sistema de Inventario</h1>
+    <p>Gestión de productos</p>
+  </header>
+
+  <div class="container mb-4">
+    <nav class="d-flex gap-3">
+      <a href="index.html" class="btn btn-outline-primary">Inicio</a>
+      <a href="productos.html" class="btn btn-primary">Gestionar Inventario</a>
+    </nav>
+  </div>
+
+  <main class="container">
+    <!-- FORMULARIO: CREAR Y EDITAR -->
+    <section class="card p-4 mb-5 shadow-sm">
+      <h2 class="mb-3">Registrar / Editar Producto</h2>
+      <form id="formProducto">
+        <div class="mb-3">
+          <label for="codigo" class="form-label">Código:</label>
+          <input type="text" class="form-control" id="codigo" placeholder="Ejemplo: P001" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre del Producto:</label>
+          <input type="text" class="form-control" id="nombre" placeholder="Ejemplo: Teclado" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="categoria" class="form-label">Categoría:</label>
+          <select class="form-select" id="categoria" required>
+            <option value="">Seleccione una categoría</option>
+            <option value="Tecnología">Tecnología</option>
+            <option value="Papelería">Papelería</option>
+            <option value="Accesorios">Accesorios</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="proveedor" class="form-label">Proveedor:</label>
+          <input type="text" class="form-control" id="proveedor" placeholder="Ejemplo: Tech Colombia" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio ($):</label>
+          <input type="number" class="form-control" id="precio" step="0.01" min="0" placeholder="Ejemplo: 120000" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="cantidad" class="form-label">Cantidad en Stock:</label>
+          <input type="number" class="form-control" id="cantidad" min="0" placeholder="Ejemplo: 10" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+        <button type="reset" class="btn btn-secondary">Limpiar</button>
+      </form>
+    </section>
+
+    <!-- TABLA: CONSULTAR, EDITAR Y ELIMINAR -->
+    <section class="card p-4 shadow-sm">
+      <h2 class="mb-3">Lista de Productos en Inventario</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Proveedor</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Estado</th>
+              <th>Valor Total</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaProductos">
+            <!-- Las filas se inyectan automáticamente desde app.js -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="8" class="text-end fw-bold">Total General del Inventario:</td>
+              <td colspan="2" class="fw-bold" id="totalGeneral">$0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Script JS al final -->
+  <script src="app.js"></script>
+</body>
+</html>
