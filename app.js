@@ -24,6 +24,23 @@ async function mostrarProductos() {
         const respuesta = await fetch(API_URL);
         productos = await respuesta.json(); // Datos que provienen de MySQL
 
+        // Actualizar KPIs del dashboard en principal.html (si existen)
+        const kpiProductos = document.getElementById("kpiProductos");
+        const kpiDisponibles = document.getElementById("kpiDisponibles");
+        const kpiAgotados = document.getElementById("kpiAgotados");
+        
+        if (kpiProductos && kpiDisponibles && kpiAgotados) {
+            let disponibles = 0;
+            let agotados = 0;
+            productos.forEach(p => {
+                if (p.cantidad > 0) disponibles++;
+                else agotados++;
+            });
+            kpiProductos.textContent = productos.length;
+            kpiDisponibles.textContent = disponibles;
+            kpiAgotados.textContent = agotados;
+        }
+
         const tabla = document.getElementById("tablaProductos");
         if (!tabla) return;
         tabla.innerHTML = "";
