@@ -55,7 +55,7 @@
             const password = document.getElementById("password").value;
 
             try {
-                const respuesta = await fetch("http://localhost:8080/api/auth/registro", {
+                const respuesta = await fetch("https://inventarioonline-production.up.railway.app/api/auth/registro", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ nombre, correo, password })

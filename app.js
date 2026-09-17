@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:8080/productos";
-const AUTH_URL = "http://localhost:8080/api/auth";
+const API_URL = "https://inventarioonline-production.up.railway.app/productos";
+const AUTH_URL = "https://inventarioonline-production.up.railway.app/api/auth";
 
 // Protección de rutas
 const paginaActual = window.location.pathname.split("/").pop();
