@@ -5,7 +5,9 @@ const AUTH_URL = "https://inventarioonline-production.up.railway.app/api/auth";
 const paginaActual = window.location.pathname.split("/").pop();
 const usuarioActual = localStorage.getItem("usuario");
 
-if (!usuarioActual && paginaActual !== "index.html" && paginaActual !== "registro.html" && paginaActual !== "") {
+// Permitir acceso si es la página de login o registro (con o sin extensión .html)
+const rutasPublicas = ["index.html", "registro.html", "index", "registro", ""];
+if (!usuarioActual && !rutasPublicas.includes(paginaActual)) {
     window.location.href = "index.html";
 }
 
