@@ -21,6 +21,10 @@ public class ProductoService {
         return repository.findAll();
     }
 
+    public List<Producto> buscarPorNombre(String nombre) {
+        return repository.findByNombreContainingIgnoreCase(nombre);
+    }
+
     public Producto guardarProducto(Producto producto) {
         return repository.save(producto);
     }
@@ -37,6 +41,7 @@ public class ProductoService {
         return repository.findById(id).map(producto -> {
             producto.setCodigo(productoActualizado.getCodigo());
             producto.setNombre(productoActualizado.getNombre());
+            producto.setMarca(productoActualizado.getMarca());
             producto.setCategoria(productoActualizado.getCategoria());
             producto.setProveedor(productoActualizado.getProveedor());
             producto.setPrecio(productoActualizado.getPrecio());

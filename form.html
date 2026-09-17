@@ -39,6 +39,11 @@
         </div>
 
         <div class="mb-3">
+          <label for="marca" class="form-label">Marca:</label>
+          <input type="text" class="form-control" id="marca" placeholder="Ejemplo: Samsung" required>
+        </div>
+
+        <div class="mb-3">
           <label for="categoria" class="form-label">Categoría:</label>
           <select class="form-select" id="categoria" required>
             <option value="">Seleccione una categoría</option>
@@ -78,6 +83,7 @@
               <th>ID</th>
               <th>Código</th>
               <th>Nombre</th>
+              <th>Marca</th>
               <th>Categoría</th>
               <th>Proveedor</th>
               <th>Precio</th>
@@ -92,7 +98,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="8" class="text-end fw-bold">Total General del Inventario:</td>
+              <td colspan="9" class="text-end fw-bold">Total General del Inventario:</td>
               <td colspan="2" class="fw-bold" id="totalGeneral">$0.00</td>
             </tr>
           </tfoot>

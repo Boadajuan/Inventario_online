@@ -42,6 +42,7 @@ async function mostrarProductos() {
                 <td>${producto.id}</td>
                 <td>${producto.codigo}</td>
                 <td>${producto.nombre}</td>
+                <td>${producto.marca || ''}</td>
                 <td>${producto.categoria}</td>
                 <td>${producto.proveedor || ''}</td>
                 <td>$${producto.precio.toFixed(2)}</td>
@@ -67,6 +68,61 @@ async function mostrarProductos() {
     }
 }
 
+// Actividad 8 y 9: Función para buscar productos
+async function buscarProductos() {
+    const nombre = document.getElementById("inputBusqueda").value.trim();
+    if (!nombre) {
+        await mostrarProductos();
+        return;
+    }
+    
+    try {
+        const respuesta = await fetch(`${API_URL}/buscar/${nombre}`);
+        productos = await respuesta.json(); // Actualizar la variable local con los resultados
+        
+        const tabla = document.getElementById("tablaProductos");
+        if (!tabla) return;
+        tabla.innerHTML = "";
+        
+        let totalInventario = 0;
+
+        productos.forEach(function(producto) {
+            const valorTotal = producto.precio * producto.cantidad;
+            totalInventario += valorTotal;
+            
+            const estado = producto.cantidad > 0 ? "Disponible" : "Agotado";
+            const stockBajo = producto.cantidad < 10 ? "<br><span class='text-danger'>⚠ Stock bajo</span>" : "";
+
+            const fila = `
+            <tr>
+                <td>${producto.id}</td>
+                <td>${producto.codigo}</td>
+                <td>${producto.nombre}</td>
+                <td>${producto.marca || ''}</td>
+                <td>${producto.categoria}</td>
+                <td>${producto.proveedor || ''}</td>
+                <td>$${producto.precio.toFixed(2)}</td>
+                <td>${producto.cantidad} ${stockBajo}</td>
+                <td>${estado}</td>
+                <td>$${valorTotal.toFixed(2)}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editarProducto(${producto.id})">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${producto.id})">Eliminar</button>
+                </td>
+            </tr>
+            `;
+            tabla.innerHTML += fila;
+        });
+
+        const totalGeneral = document.getElementById("totalGeneral");
+        if (totalGeneral) {
+            totalGeneral.textContent = "$" + totalInventario.toFixed(2);
+        }
+    } catch (error) {
+        console.error("Error en la búsqueda:", error);
+    }
+}
+
 // Capturar formulario y enviar al servidor (CREATE / UPDATE)
 const formulario = document.getElementById("formProducto");
 if (formulario) {
@@ -76,11 +132,26 @@ if (formulario) {
         const producto = {
             codigo: document.getElementById("codigo").value,
             nombre: document.getElementById("nombre").value,
+            marca: document.getElementById("marca").value,
             categoria: document.getElementById("categoria").value,
             proveedor: document.getElementById("proveedor").value,
             precio: Number(document.getElementById("precio").value),
             cantidad: Number(document.getElementById("cantidad").value)
         };
+
+        // Opción D: Validaciones de campos
+        if (!producto.codigo || !producto.nombre || !producto.marca || !producto.categoria || !producto.proveedor) {
+            alert("No se permiten campos vacíos.");
+            return;
+        }
+        if (producto.precio <= 0) {
+            alert("El precio debe ser un número positivo mayor a 0.");
+            return;
+        }
+        if (producto.cantidad < 0) {
+            alert("La cantidad no puede ser negativa.");
+            return;
+        }
 
         if (idEditando === null) {
             // Enviar a la Base de Datos con POST
@@ -162,6 +233,7 @@ function editarProducto(id) {
 
     document.getElementById("codigo").value = producto.codigo;
     document.getElementById("nombre").value = producto.nombre;
+    document.getElementById("marca").value = producto.marca || '';
     document.getElementById("categoria").value = producto.categoria;
     document.getElementById("proveedor").value = producto.proveedor || '';
     document.getElementById("precio").value = producto.precio;

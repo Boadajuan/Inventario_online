@@ -15,6 +15,7 @@ public class Producto {
     private Long id;
     private String codigo;
     private String nombre;
+    private String marca;
     private String categoria;
     private String proveedor;
     private Double precio;
@@ -45,6 +46,14 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public String getCategoria() {

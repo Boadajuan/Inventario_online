@@ -30,6 +30,11 @@ public class ProductoController {
         return service.listarProductos();
     }
 
+    @GetMapping("/productos/buscar/{nombre}")
+    public List<Producto> buscarProductoPorNombre(@PathVariable String nombre) {
+        return service.buscarPorNombre(nombre);
+    }
+
     @PostMapping("/productos")
     public Producto guardarProducto(@RequestBody Producto producto) {
         return service.guardarProducto(producto);

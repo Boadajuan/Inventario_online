@@ -26,6 +26,12 @@
         <!-- Sección Tabla -->
         <section>
             <h2>Lista de Productos</h2>
+            
+            <div class="mb-3 d-flex gap-2" style="max-width: 500px;">
+                <input type="text" id="inputBusqueda" class="form-control" placeholder="Buscar producto por nombre...">
+                <button class="btn btn-primary" onclick="buscarProductos()">Buscar</button>
+            </div>
+
             <div class="tabla-responsive">
                 <table>
                     <thead>
@@ -33,6 +39,7 @@
                             <th>ID</th>
                             <th>Código</th>
                             <th>Nombre</th>
+                            <th>Marca</th>
                             <th>Categoría</th>
                             <th>Proveedor</th>
                             <th>Precio</th>
@@ -47,7 +54,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="8" class="text-end fw-bold">Total General del Inventario:</td>
+                            <td colspan="9" class="text-end fw-bold">Total General del Inventario:</td>
                             <td colspan="2" class="fw-bold" id="totalGeneral">$0.00</td>
                         </tr>
                     </tfoot>
